@@ -1,0 +1,2 @@
+rootProject.name = "bayadTechExam"
+include ':app'
