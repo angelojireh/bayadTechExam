@@ -1,8 +1,6 @@
 package com.example.bayadtechexam.models
 
-class PromoModel : ArrayList<PromoModelItem>()
-
-data class PromoModelItem(
+data class PromoModel(
     val _id: String,
     val name: String,
     val details: String,
