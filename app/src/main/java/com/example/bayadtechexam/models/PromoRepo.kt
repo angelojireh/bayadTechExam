@@ -16,6 +16,7 @@ class PromoRepo {
 
         val data = MutableLiveData<List<PromoModel>>()
 
+        //call api interface GET method
         apiInterface.fetchAllPromos().enqueue(object: Callback<List<PromoModel>>{
             override fun onFailure(call: Call<List<PromoModel>>, t: Throwable) {
                 data.value = null

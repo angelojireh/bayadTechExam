@@ -39,6 +39,7 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
 
     inner class PromoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
 
+        //initialize item click listener
         init {
             itemView.setOnClickListener(this)
         }
@@ -46,12 +47,14 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
         override fun onClick(v: View?) {
             val pos: Int = bindingAdapterPosition
             if(pos != RecyclerView.NO_POSITION) {
+                //send arraylist based on position to promo details
                 val mPromoDetails = data?.let { PromoDetails(context, pos, it as ArrayList<PromoModel>) }
                 mPromoDetails?.setPromoDetails()
             }
         }
 
         fun bindView(item: PromoModel?){
+            //set image and textview values
             if(item?.image_url != null && item.image_url.isNotEmpty()){
                 loadImage(item.image_url, itemView.imageview_promo)
             }

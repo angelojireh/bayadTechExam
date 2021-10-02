@@ -17,10 +17,11 @@ class PromoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_promo)
 
-        loadPromos()
+        //load clicked promo
+        loadPromo()
     }
 
-    private fun loadPromos() {
+    private fun loadPromo() {
         name = intent.getStringExtra("name")
         details = intent.getStringExtra("details")
         image_url = intent.getStringExtra("image_url")
