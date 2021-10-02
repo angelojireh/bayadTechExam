@@ -1,5 +1,6 @@
 package com.example.bayadtechexam.adapters
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,11 +8,12 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bayadtechexam.R
 import com.example.bayadtechexam.models.PromoModel
+import com.example.bayadtechexam.viewmodels.PromoDetails
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.promo_rcv_itemview.view.*
 
 
-class PromoAdapter: RecyclerView.Adapter<PromoAdapter.PromoViewHolder>() {
+class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.PromoViewHolder>() {
 
     private var data : ArrayList<PromoModel>? = null
 
@@ -35,7 +37,20 @@ class PromoAdapter: RecyclerView.Adapter<PromoAdapter.PromoViewHolder>() {
         return data?.size ?: 0
     }
 
-    inner class PromoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView) {
+    inner class PromoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            val pos: Int = bindingAdapterPosition
+            if(pos != RecyclerView.NO_POSITION) {
+                val mPromoDetails = data?.let { PromoDetails(context, pos, it as ArrayList<PromoModel>) }
+                mPromoDetails?.setPromoDetails()
+            }
+        }
+
         fun bindView(item: PromoModel?){
             if(item?.image_url != null && item.image_url.isNotEmpty()){
                 loadImage(item.image_url, itemView.imageview_promo)

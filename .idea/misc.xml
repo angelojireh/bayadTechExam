@@ -3,7 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/angel/AndroidStudioProjects/bayadTechExam/app/src/main/res/layout/activity_main.xml" value="0.12360688956433637" />
+        <entry key="..\:/Users/angel/AndroidStudioProjects/bayadTechExam/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/angel/AndroidStudioProjects/bayadTechExam/app/src/main/res/layout/activity_promo.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/angel/AndroidStudioProjects/bayadTechExam/app/src/main/res/layout/promo_rcv_itemview.xml" value="0.264" />
       </map>
     </option>

@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         mGridLayoutManager = GridLayoutManager(this, 1)
-        mPromoAdapter = PromoAdapter()
+        mPromoAdapter = PromoAdapter(this)
         recyclerView_promos.setHasFixedSize(true)
         recyclerView_promos.layoutManager = mGridLayoutManager
         recyclerView_promos.adapter = mPromoAdapter
@@ -39,10 +39,14 @@ class MainActivity : AppCompatActivity() {
         mPromoViewModel.fetchAllPromos()
         mPromoViewModel.promoModelListLiveData?.observe(this, Observer {
             if (it != null){
+                progressBar_promos.visibility = View.GONE
                 recyclerView_promos.visibility = View.VISIBLE
                 mPromoAdapter.setData(it as ArrayList<PromoModel>)
             }
-            progressBar_promos.visibility = View.GONE
+            else{
+                progressBar_promos.visibility = View.GONE
+                tv_no_promos.visibility = View.VISIBLE
+            }
         })
     }
 }
