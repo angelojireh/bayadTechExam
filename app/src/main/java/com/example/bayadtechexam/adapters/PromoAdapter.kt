@@ -44,6 +44,7 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
             itemView.setOnClickListener(this)
         }
 
+        //when row is clicked
         override fun onClick(v: View?) {
             val pos: Int = bindingAdapterPosition
             if(pos != RecyclerView.NO_POSITION) {
@@ -68,6 +69,7 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
         fun loadImage(image: String, imageView: ImageView){
             Picasso.get()
                 .load(image)
+                .resize(450, 450)
                 .centerCrop()
                 .into(imageView)
         }

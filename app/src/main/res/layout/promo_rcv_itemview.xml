@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_marginVertical="10dp"
     android:layout_marginHorizontal="10dp"
+    app:cardElevation="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -17,16 +18,16 @@
             android:layout_height="wrap_content"
             android:id="@+id/imageview_promo"
             android:src="@mipmap/ic_launcher"
-            android:layout_margin="5dp"/>
+            android:layout_margin="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_promo_name"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="20sp"
-            android:text="Promo name goes here"/>
+            android:text="Promo name goes here"
+            android:layout_marginBottom="10dp"/>
 
     </LinearLayout>
 
