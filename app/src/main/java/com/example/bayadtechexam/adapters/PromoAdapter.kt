@@ -1,10 +1,12 @@
 package com.example.bayadtechexam.adapters
 
 import android.app.Activity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bayadtechexam.R
 import com.example.bayadtechexam.models.PromoModel
@@ -13,7 +15,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.promo_rcv_itemview.view.*
 
 
-class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.PromoViewHolder>() {
+class PromoAdapter(val context: Activity, val deleteListener: DeleteListener): RecyclerView.Adapter<PromoAdapter.PromoViewHolder>() {
 
     private var data : ArrayList<PromoModel>? = null
 
@@ -22,7 +24,10 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
         notifyDataSetChanged()
     }
 
-
+    fun deleteData(position: Int){
+        data?.removeAt(position)
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PromoViewHolder {
         return  PromoViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.promo_rcv_itemview, parent, false))
@@ -37,11 +42,14 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
         return data?.size ?: 0
     }
 
-    inner class PromoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
+    inner class PromoViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView), View.OnClickListener, View.OnLongClickListener{
 
-        //initialize item click listener
+        //initialize item click/long click listeners
         init {
+            itemView.isClickable = true
+            itemView.isLongClickable = true
             itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
         }
 
         //when row is clicked
@@ -52,6 +60,15 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
                 val mPromoDetails = data?.let { PromoDetails(context, pos, it as ArrayList<PromoModel>) }
                 mPromoDetails?.setPromoDetails()
             }
+        }
+
+        //when row is long clicked
+        override fun onLongClick(p0: View?): Boolean {
+            val pos: Int = bindingAdapterPosition
+            if(pos != RecyclerView.NO_POSITION) {
+                data?.get(pos)?.let { deleteListener.onItemDelete(it, pos) }
+            }
+            return true
         }
 
         fun bindView(item: PromoModel?){
@@ -73,5 +90,10 @@ class PromoAdapter(val context: Activity): RecyclerView.Adapter<PromoAdapter.Pro
                 .centerCrop()
                 .into(imageView)
         }
+    }
+
+    //lets main activity know which promo to delete
+    interface DeleteListener{
+        fun onItemDelete(promoModel: PromoModel, position: Int)
     }
 }
