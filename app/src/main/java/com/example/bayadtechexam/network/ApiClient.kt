@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASEURL = "https://crudcrud.com/api/9221fb9782bd45939fcc5c46f1333c7c/"
+const val BASEURL = "https://crudcrud.com/api/bd269e2d929f431b8d4fa668b75687b5/"
 class ApiClient {
     companion object{
         private var retrofit:Retrofit? = null
